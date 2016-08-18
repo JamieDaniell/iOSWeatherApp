@@ -77,7 +77,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.64178192469339612" green="0.90960985422134399" blue="0.56511097885158057" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="eWE-Ux-OIG" firstAttribute="top" secondItem="OZe-cj-oOs" secondAttribute="bottom" constant="34" id="11W-Cv-fHO"/>
                             <constraint firstItem="dYb-VB-nw1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="80" id="17X-7i-K8g"/>
@@ -110,6 +110,7 @@
                         <outlet property="currentSummaryLabel" destination="Ulr-Ky-JFs" id="SXs-0O-5id"/>
                         <outlet property="currentTemperatureLabel" destination="NZV-b0-F2i" id="8xY-Vn-rY3"/>
                         <outlet property="currentWeatherIcon" destination="CGP-vZ-oD8" id="UNy-r5-hNh"/>
+                        <outlet property="locationName" destination="eWE-Ux-OIG" id="Qth-3F-xHH"/>
                         <outlet property="refreshButton" destination="OZe-cj-oOs" id="JeC-y1-UkG"/>
                     </connections>
                 </viewController>
