@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreLocation
 extension CurrentWeather
 {
     var temperatureString: String
@@ -28,10 +28,11 @@ extension CurrentWeather
     }
 }
 
-class ViewController: UIViewController
+class ViewController: UIViewController , CLLocationManagerDelegate
 {
     
     @IBOutlet weak var currentTemperatureLabel: UILabel!
+    @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var currentHumidityLabel: UILabel!
     @IBOutlet weak var currentPrecipitationLabel: UILabel!
     @IBOutlet weak var currentWeatherIcon: UIImageView!
@@ -40,12 +41,21 @@ class ViewController: UIViewController
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     lazy var forecastAPIClient = ForecastAPIClient(APIKey: "4dd81959b6d1a26b14e680f508442ef5")
-    let coordinate = Coordinate(latitude: 37.8267, longitude: -122.423 )
-    
+    var coordinate = Coordinate(latitude: 0, longitude: 0){
+        didSet
+        {
+            getPOI()
+        }
+    }
+    let locationManager: CLLocationManager = CLLocationManager()
+    let authorizationStatus = CLLocationManager.authorizationStatus()
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        locationManager.delegate = self
+        locationManager.requestLocation()
         fetchCurrentWeather()
     }
 
@@ -108,6 +118,47 @@ class ViewController: UIViewController
         {
             activityIndicator.stopAnimating()
         }
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        if let currentLocation = locations.first
+        {
+            coordinate = Coordinate(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+        }
+        print(locations.first!.coordinate.latitude)
+        print(locations.first!.coordinate.longitude)
+        
+        
+    }
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
+    func getPOI() -> Void
+    {
+        let place = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        print("lat: \(place.coordinate.longitude)")
+        CLGeocoder().reverseGeocodeLocation(place , completionHandler: { (placemarks , errors) -> Void in
+            
+            
+            if errors != nil
+            {
+                print("gelocator failed")
+                return
+            }
+            if placemarks?.count > 0
+            {
+                print(placemarks!.count)
+                print(placemarks?[0].locality)
+                let pm = (placemarks?[0])! as CLPlacemark
+                print(pm.locality)
+                self.locationName.text = pm.locality
+            }
+            else
+            {
+                print(" unidentified problem")
+            }
+            
+        })
     }
 
 }

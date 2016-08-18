@@ -11,6 +11,7 @@
 		55CF5F5E1D4A2E2400E642C9 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CF5F5D1D4A2E2400E642C9 /* WeatherIcon.swift */; };
 		55D502AC1D64684400F2AC24 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D502AB1D64684400F2AC24 /* APIClient.swift */; };
 		55D502AE1D648CF500F2AC24 /* ForecastClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D502AD1D648CF400F2AC24 /* ForecastClient.swift */; };
+		55D502B21D66038C00F2AC24 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D502B11D66038C00F2AC24 /* MapKit.framework */; };
 		97F14FE91CB9EEB20065EE08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F14FE81CB9EEB20065EE08 /* AppDelegate.swift */; };
 		97F14FEB1CB9EEB20065EE08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97F14FEA1CB9EEB20065EE08 /* ViewController.swift */; };
 		97F14FEE1CB9EEB20065EE08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97F14FEC1CB9EEB20065EE08 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		55CF5F5D1D4A2E2400E642C9 /* WeatherIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
 		55D502AB1D64684400F2AC24 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		55D502AD1D648CF400F2AC24 /* ForecastClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastClient.swift; sourceTree = "<group>"; };
+		55D502B11D66038C00F2AC24 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		97F14FE51CB9EEB20065EE08 /* Stormy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stormy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F14FE81CB9EEB20065EE08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97F14FEA1CB9EEB20065EE08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55D502B21D66038C00F2AC24 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +58,7 @@
 		97F14FDC1CB9EEB20065EE08 = {
 			isa = PBXGroup;
 			children = (
+				55D502B11D66038C00F2AC24 /* MapKit.framework */,
 				97F14FE71CB9EEB20065EE08 /* Stormy */,
 				97F14FE61CB9EEB20065EE08 /* Products */,
 			);
@@ -116,6 +120,14 @@
 				TargetAttributes = {
 					97F14FE41CB9EEB20065EE08 = {
 						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
