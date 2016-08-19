@@ -55,6 +55,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
+        //locationManager.startUpdatingLocation()
         locationManager.requestLocation()
         fetchCurrentWeather()
     }
@@ -75,10 +78,10 @@ class ViewController: UIViewController , CLLocationManagerDelegate
                 // have to get back to the main thread --> get main queue
                 // submits a closure to contaitning some code to a dispatch queue of our choosing in an asyncronous manner
                 // (i.e move it to main queue)
-                self.display(currentWeather)
+                    self.display(currentWeather)
                 
                 case .Failure(let error as NSError):
-                self.showAlert("Unable to Retreive Forecast" , message: error.localizedDescription)
+                    self.showAlert("Unable to Retreive Forecast" , message: error.localizedDescription)
                 
                 default: break
             }
@@ -104,6 +107,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate
     @IBAction func refreshWeather(sender: AnyObject)
     {
         toggleRefreshAnimation(true)
+        locationManager.requestLocation()
         fetchCurrentWeather()
         
     }
@@ -121,12 +125,12 @@ class ViewController: UIViewController , CLLocationManagerDelegate
     }
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        if let currentLocation = locations.first
+        if let currentLocation = locations.last
         {
             coordinate = Coordinate(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
+            print(currentLocation.coordinate.latitude)
+            print(currentLocation.coordinate.longitude)
         }
-        print(locations.first!.coordinate.latitude)
-        print(locations.first!.coordinate.longitude)
         
         
     }
@@ -136,9 +140,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate
     func getPOI() -> Void
     {
         let place = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        print("lat: \(place.coordinate.longitude)")
         CLGeocoder().reverseGeocodeLocation(place , completionHandler: { (placemarks , errors) -> Void in
-            
             
             if errors != nil
             {
@@ -147,11 +149,8 @@ class ViewController: UIViewController , CLLocationManagerDelegate
             }
             if placemarks?.count > 0
             {
-                print(placemarks!.count)
-                print(placemarks?[0].locality)
                 let pm = (placemarks?[0])! as CLPlacemark
-                print(pm.locality)
-                self.locationName.text = pm.locality
+                self.locationName.text = pm.subLocality
             }
             else
             {
