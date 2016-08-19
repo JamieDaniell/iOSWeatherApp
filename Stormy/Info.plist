@@ -22,7 +22,7 @@
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We would like to use your location in the background. Is that OK?</string>
-	<key>NSLocationWhenInUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need to use current location to get the weather. Is that OK? </string>
 	<key>UIBackgroundModes</key>
 	<array>
